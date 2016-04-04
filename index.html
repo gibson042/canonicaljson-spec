@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>canonicaljson by gibson042</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">canonicaljson</h1>
+        <p class="header">Specification of canonical-form JSON for equivalence comparison</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/gibson042/canonicaljson-spec/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/gibson042/canonicaljson-spec/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/gibson042/canonicaljson-spec">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/gibson042">gibson042</a></p>
+
+
+      </header>
+      <section>
+        <h1>
+<a id="json-canonical-form" class="anchor" href="#json-canonical-form" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>JSON Canonical Form</h1>
+
+<p><a href="https://tools.ietf.org/html/rfc7159">RFC 7159</a> defines JSON as "a text format for the serialization of structured data", but allows many distinct serializations to describe the <em>same</em> data.
+Such human-friendly flexibility can hinder machine treatment of JSON text, particularly when it is used as input for cryptographic hash functions that are expected to yield identical results for logically equivalent input (as is the case in computation of digital signatures).
+This specification defines a unique canonical form for any JSON value, the result being safe for comparison (in that logically equivalent structured data have the same canonical form).</p>
+
+<h2>
+<a id="definition" class="anchor" href="#definition" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Definition</h2>
+
+<p>JSON text in canonical form:</p>
+
+<ol>
+<li>MUST be encoded in <a href="https://tools.ietf.org/html/rfc3629">UTF-8</a>
+</li>
+<li>MUST NOT include insignificant (i.e., inter-token) whitespace (defined in <a href="https://tools.ietf.org/html/rfc7159#section-2">section 2 of RFC 7159</a>)</li>
+<li>MUST order the members of all objects lexicographically by the UCS (Unicode Character Set) codepoints of their names</li>
+<li>MUST represent all integer numbers (those with a zero-valued fractional part)
+
+<ol>
+<li>without leading zeroes, and</li>
+<li>without a decimal point, and</li>
+<li>without an exponent</li>
+</ol>
+</li>
+<li>MUST represent all non-integer numbers in exponential notation
+
+<ol>
+<li>including a nonzero single-digit significand integer part, and</li>
+<li>including a nonempty significand fractional part, and</li>
+<li>including no trailing zeroes in the significand fractional part (other than one required to satisfy the preceding point), and</li>
+<li>including a capital "E", and</li>
+<li>including no plus sign in the exponent, and</li>
+<li>including no insignificant leading zeroes in the exponent</li>
+</ol>
+</li>
+<li>MUST represent all strings (including object member names) in their minimal-length encoding
+
+<ol>
+<li>avoiding escape sequences for characters except those otherwise inexpressible in JSON (U+0022 QUOTATION MARK, U+005C REVERSE SOLIDUS, and ASCII control characters U+0000 through U+001F), and</li>
+<li>using two-character escape sequences for characters that support them:
+
+<ul>
+<li>
+<code>\b</code> U+0008 BACKSPACE</li>
+<li>
+<code>\t</code> U+0009 CHARACTER TABULATION ("tab")</li>
+<li>
+<code>\n</code> U+000A LINE FEED ("newline")</li>
+<li>
+<code>\f</code> U+000C FORM FEED</li>
+<li>
+<code>\r</code> U+000D CARRIAGE RETURN, and</li>
+</ul>
+</li>
+<li>using six-character <code>\u00xx</code> lowercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence</li>
+</ol>
+</li>
+</ol>
+
+<h3>
+<a id="example" class="anchor" href="#example" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Example</h3>
+
+<div class="highlight highlight-source-json"><pre>{<span class="pl-s"><span class="pl-pds">"</span>0<span class="pl-pds">"</span></span>:<span class="pl-c1">0</span>,<span class="pl-s"><span class="pl-pds">"</span>0.1<span class="pl-pds">"</span></span>:<span class="pl-c1">1.0E-1</span>,<span class="pl-s"><span class="pl-pds">"</span>1<span class="pl-pds">"</span></span>:<span class="pl-c1">1</span>,<span class="pl-s"><span class="pl-pds">"</span>10<span class="pl-pds">"</span></span>:<span class="pl-c1">10</span>,<span class="pl-s"><span class="pl-pds">"</span>10.1<span class="pl-pds">"</span></span>:<span class="pl-c1">1.01E1</span>,<span class="pl-s"><span class="pl-pds">"</span>emoji<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span>😃<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>escape<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\u001b</span><span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>whitespace<span class="pl-pds">"</span></span>:<span class="pl-s"><span class="pl-pds">"</span> <span class="pl-cce">\t\n\r</span><span class="pl-pds">"</span></span>}</pre></div>
+
+<h2>
+<a id="validating-implementations" class="anchor" href="#validating-implementations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Validating implementations</h2>
+
+<p>TODO</p>
+
+<h2>
+<a id="prior-art" class="anchor" href="#prior-art" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prior Art</h2>
+
+<p>This specification updates the expired <a href="https://tools.ietf.org/html/draft-staykov-hu-json-canonical-form-00">JSON Canonical Form internet draft</a> to ensure a <em>unique</em> canonical representation of every JSON value.</p>
+
+<p>Representation of non-integer numbers still matches the canonical <strong>float</strong> representation from <a href="https://www.w3.org/TR/xmlschema-2/#float-canonical-representation">section 3.2.4.2 of XML Schema Datatypes</a>, but integer numbers now have a non-exponential representation matching <strong>integer</strong> (<a href="https://www.w3.org/TR/xmlschema-2/#integer-canonical-repr">section 3.3.13.2</a>) and <a href="https://tools.ietf.org/html/rfc7638">RFC 7638 JSON Web Key (JWK) Thumbprint</a>.</p>
+
+<p>The treatment of strings generalizes <a href="https://tools.ietf.org/html/rfc7638#section-3.3">section 3.3 of RFC 7638</a> and <a href="https://keybase.io/docs/api/1.0/canonical_packings#json">Keybase canonical JSON packing</a> (both of which cryptographically hash JSON text) to cover the full range of Unicode characters.</p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
