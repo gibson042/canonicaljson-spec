@@ -1,0 +1,25 @@
+{
+	"a": null,
+	"A": null,
+	"_": null,
+	"\u00C2": null,
+	"A\u0301": null,
+	"\ud834\udf06": null,
+	"\u000a": null,
+	"\u000B": null,
+	"\t": null,
+	"\u0020": null,
+	"deep": {
+		"foo": null,
+		"bar": null,
+		"baz": [
+			"qux",
+			"quux",
+			{
+				"corge": "grault",
+				"garply": ["waldo", "fred", {"plugh": "xyzzy"}],
+				"": null
+			}
+		]
+	}
+}

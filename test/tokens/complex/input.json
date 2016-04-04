@@ -1,0 +1,14 @@
+{
+	"source": "https://tools.ietf.org/html/draft-staykov-hu-json-canonical-form-00#section-4",
+	"foo" : "foo bar",
+	"abc":"def",
+	"zoo" :
+		[
+			"def",
+			"abc"
+		],
+	"d1":-12.34e4,
+	"d2":1E-130,
+	"d3":0.0E-0,
+	"d4":1.2
+}

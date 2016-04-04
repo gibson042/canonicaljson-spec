@@ -98,7 +98,12 @@ This specification defines a unique canonical form for any JSON value, the resul
 <h2>
 <a id="validating-implementations" class="anchor" href="#validating-implementations" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Validating implementations</h2>
 
-<p>TODO</p>
+<ol>
+	<li>Get a local copy of this repository.</li>
+	<li>Create an executable that uses a candidate implementation to output the JSON canonical form of the contents of its first argument, exiting with a status of 0 if and only if the conversion was successful.</li>
+	<li>Invoke <code>test.sh</code> from this repository, passing the path to the above executable in the first argument.</li>
+	<li><code>test.sh</code> will provide known input and look for expected output, printing the results, exiting with a status of 0 if and only if the executable (and therefore the candidate implementation) adheres to this specification.</li>
+</ol>
 
 <h2>
 <a id="prior-art" class="anchor" href="#prior-art" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prior Art</h2>
