@@ -28,7 +28,9 @@ JSON text in canonical form:
         * `\t` U+0009 CHARACTER TABULATION ("tab")
         * `\n` U+000A LINE FEED ("newline")
         * `\f` U+000C FORM FEED
-        * `\r` U+000D CARRIAGE RETURN, and
+        * `\r` U+000D CARRIAGE RETURN
+        * `\"` U+0022 QUOTATION MARK
+        * `\\` U+005C REVERSE SOLIDUS ("backslash"), and
      3. using six-character `\u00xx` lowercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence
 
 ### Example
