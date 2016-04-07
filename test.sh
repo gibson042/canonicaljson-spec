@@ -4,13 +4,12 @@
 # Exit immediately upon failure.
 set -e
 
-# Switch to test directory, verifying processor first in case it is relative.
-processor="`readlink -ve "$1"`"
-cd "`dirname "$0"`"
+# Verify processor executability.
+which "$1" >/dev/null || readlink -ve "$1" >/dev/null
 
 res=0
-for test in test/test-*.sh; do
-	$test "$processor" || res=$?
+for test in "`dirname "$0"`"/test/test-*.sh; do
+	$test "$@" || res=$?
 done
 [ $res = 0 ] && echo "PASS: $@" || echo "FAIL: $@"
 exit $res

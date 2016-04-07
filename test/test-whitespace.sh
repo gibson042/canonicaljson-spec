@@ -4,13 +4,19 @@
 # Exit immediately upon failure.
 set -e
 
-# Switch to test directory, verifying processor first in case it is relative.
-processor="`readlink -ve "$1"`"
-cd "`dirname "$0"`"
+# Verify processor executability.
+processor="`which -a "$1" || readlink -ve "$1"`"
+shift
+set -- "$processor" "$@"
 
-res=0
+# Switch to the test directory for just long enough to get short test names
+wd="`pwd`"
+dir="`dirname "$0"`"
+cd "$dir"
+res=
 for test in whitespace/*; do
-	if { "$processor" "$test"/input.json; echo; } | diff -u "$test"/expected.json - ; then
+	[ x$res = x ] && { res=0 ; cd "$wd"; }
+	if { "$@" "$dir/$test"/input.json; echo; } | diff -u "$dir/$test"/expected.json - ; then
 		echo "$test OK"
 	else
 		res=$?
