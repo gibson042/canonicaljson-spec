@@ -12,4 +12,5 @@ res=0
 for test in test/test-*.sh; do
 	$test "$processor" || res=$?
 done
+[ $res = 0 ] && echo "PASS: $@" || echo "FAIL: $@"
 exit $res
