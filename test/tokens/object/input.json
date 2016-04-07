@@ -17,9 +17,15 @@
 			"quux",
 			{
 				"corge": "grault",
-				"garply": ["waldo", "fred", {"plugh": "xyzzy"}],
-				"": null
+				"garply": ["waldo", "fred", {"plugh": "xyzzy"}]
 			}
-		]
+		],
+		"edges": {
+			"\u0022\u005C\u0009\t\\\"": "\u0022\u005C\u0009\t\\\"",
+			"\u001B": "ESC",
+			"\u0000": null,
+			"\u007F": "DEL",
+			"": "empty"
+		}
 	}
 }
