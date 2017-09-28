@@ -9,7 +9,8 @@ This specification defines a unique canonical form for any JSON value, the resul
 JSON text in canonical form:
   1. MUST be encoded in [UTF-8](https://tools.ietf.org/html/rfc3629)
   2. MUST NOT include insignificant (i.e., inter-token) whitespace (defined in [section 2 of RFC 7159](https://tools.ietf.org/html/rfc7159#section-2))
-  3. MUST order the members of all objects lexicographically by the UCS (Unicode Character Set) codepoints of their names
+  3. MUST order the members of all objects lexicographically by the UCS (Unicode Character Set) code points of their names
+     1. preserving and utilizing the code points in [U+D800, U+DFFF] for all lone surrogates
   4. MUST represent all integer numbers (those with a zero-valued fractional part)
      1. without leading zeroes, and
      2. without a decimal point, and
@@ -21,25 +22,31 @@ JSON text in canonical form:
      4. including a capital "E", and
      5. including no plus sign in the exponent, and
      6. including no insignificant leading zeroes in the exponent
-  6. MUST represent all strings (including object member names) in their minimal-length encoding
-     1. avoiding escape sequences for characters except those otherwise inexpressible in JSON (U+0022 QUOTATION MARK, U+005C REVERSE SOLIDUS, and ASCII control characters U+0000 through U+001F), and
+  6. MUST represent all strings (including object member names) in their minimal-length UTF-8 encoding
+     1. avoiding escape sequences for characters except those otherwise inexpressible in JSON (U+0022 QUOTATION MARK, U+005C REVERSE SOLIDUS, and ASCII control characters U+0000 through U+001F) or UTF-8 (U+D800 through U+DFFF), and
      2. using two-character escape sequences for characters that support them:
         * `\b` U+0008 BACKSPACE
         * `\t` U+0009 CHARACTER TABULATION ("tab")
         * `\n` U+000A LINE FEED ("newline")
         * `\f` U+000C FORM FEED
-        * `\r` U+000D CARRIAGE RETURN, and
-     3. using six-character `\u00xx` lowercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence
+        * `\r` U+000D CARRIAGE RETURN
+        * `\"` U+0022 QUOTATION MARK
+        * `\\` U+005C REVERSE SOLIDUS ("backslash"), and
+     3. using six-character `\u00xx` lowercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence, and
+     4. using six-character \udxxx lowercase hexadecimal escape sequences for lone surrogates
 
 ### Example
 
 ```json
-{"0":0,"0.1":1.0E-1,"1":1,"10":10,"10.1":1.01E1,"emoji":"😃","escape":"\u001b","whitespace":" \t\n\r"}
+{"0":0,"0.1":1.0E-1,"1":1,"10":10,"10.1":1.01E1,"emoji":"😃","escape":"\u001b","lone surrogate":"\udead","whitespace":" \t\n\r"}
 ```
 
 ## Validating implementations
 
-TODO
+  1. Get a local copy of this repository.
+  2. Create an executable that uses a candidate implementation to output the JSON canonical form of the contents of its first argument, exiting with a status of 0 if and only if the conversion was successful.
+  3. Invoke `test.sh` from this repository, passing the path to the above executable in the first argument.
+  4. `test.sh` will provide known input and look for expected output, printing the results, exiting with a status of 0 if and only if the executable (and therefore the candidate implementation) adheres to this specification.
 
 ## Prior Art
 
