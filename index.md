@@ -33,7 +33,7 @@ JSON text in canonical form:
         * `\"` U+0022 QUOTATION MARK
         * `\\` U+005C REVERSE SOLIDUS ("backslash"), and
      3. using six-character `\u00xx` lowercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence, and
-     4. using six-character \udxxx lowercase hexadecimal escape sequences for lone surrogates
+     4. using six-character `\udxxx` lowercase hexadecimal escape sequences for lone surrogates
 
 ### Example
 
