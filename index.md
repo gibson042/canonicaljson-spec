@@ -12,16 +12,19 @@ JSON text in canonical form:
   3. MUST order the members of all objects lexicographically by the UCS (Unicode Character Set) code points of their names
      1. preserving and utilizing the code points in [U+D800, U+DFFF] for all lone surrogates
   4. MUST represent all integer numbers (those with a zero-valued fractional part)
-     1. without leading zeroes, and
-     2. without a decimal point, and
-     3. without an exponent
+     1. without a leading plus sign, and
+     2. without a leading minus sign when the value is zero, and
+     3. without leading zeroes, and
+     4. without a decimal point, and
+     5. without an exponent
   5. MUST represent all non-integer numbers in exponential notation
-     1. including a nonzero single-digit significand integer part, and
-     2. including a nonempty significand fractional part, and
-     3. including no trailing zeroes in the significand fractional part (other than one required to satisfy the preceding point), and
-     4. including a capital "E", and
-     5. including no plus sign in the exponent, and
-     6. including no insignificant leading zeroes in the exponent
+     1. including no leading plus sign, and
+     2. including a nonzero single-digit significand integer part, and
+     3. including a nonempty significand fractional part, and
+     4. including no trailing zeroes in the significand fractional part (other than one required to satisfy the preceding point), and
+     5. including a capital "E", and
+     6. including no plus sign in the exponent, and
+     7. including no insignificant leading zeroes in the exponent
   6. MUST represent all strings (including object member names) in their minimal-length UTF-8 encoding
      1. avoiding escape sequences for characters except those otherwise inexpressible in JSON (U+0022 QUOTATION MARK, U+005C REVERSE SOLIDUS, and ASCII control characters U+0000 through U+001F) or UTF-8 (U+D800 through U+DFFF), and
      2. using two-character escape sequences for characters that support them:
