@@ -16,7 +16,7 @@ cd "$dir"
 res=
 for test in whitespace/*; do
 	[ x$res = x ] && { res=0 ; cd "$wd"; }
-	if { "$@" "$dir/$test"/input.json; echo; } | diff -u "$dir/$test"/expected.json - ; then
+	if { "$@" "$dir/$test"/input.json; echo; } | diff -u - "$dir/$test"/expected.json ; then
 		echo "$test OK"
 	else
 		res=$?

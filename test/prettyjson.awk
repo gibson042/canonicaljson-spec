@@ -3,7 +3,7 @@ BEGIN {
 	# define constants
 	STRUCTURAL_TOKEN = "^[]{:,}[]"
 	TOKEN = "[\t\n\r ]+|[]{:,}[]|null|false|true|-?(0|[1-9][0-9]*)(\\.[0-9]+|)([Ee][+-]?[0-9]+|)|\"(\\\\[\"\\\\/bfnrt]|\\\\u[0-9a-fA-F]{4}|[^\\0-\\37\"\\\\])*\""
-	MALFORMED = "Non-token input after % characters: "
+	MALFORMED = "Non-token input after %d characters: "
 	MAX_LINE = 72
 	INDENT = "  "
 
@@ -34,8 +34,7 @@ BEGIN {
 			sub(/[\n\r].*/, "", excess)
 
 			# generate error message
-			err = MALFORMED
-			sub(/%/, consumed, err)
+			err = sprintf(MALFORMED, consumed)
 			free = MAX_LINE - length(err)
 			if ( free < 5 && length(excess) > free ) {
 				err = err "\n" excess

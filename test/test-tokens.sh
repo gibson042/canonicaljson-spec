@@ -11,7 +11,7 @@ set -- "$processor" "$@"
 
 # Create and automatically clean up temp space, preserving exit status.
 res=70 # EX_SOFTWARE ("internal software error")
-tmp="`mktemp -d`"
+tmp="`mktemp -d XXXXXXXX.$(basename "$0")`"
 trap "rm -rf '$tmp' >/dev/null 2>&1 ;"'exit $res' 0
 
 # Switch to the test directory for just long enough to get short test names
@@ -21,13 +21,14 @@ cd "$dir"
 res=
 for test in tokens/*; do
 	[ x$res = x ] && { res=0 ; cd "$wd"; }
-	if { "$@" "$dir/$test"/input.json | tee "$tmp"/canonical; echo; } |
-		diff -q "$dir/$test"/expected.json - ; then
+	if { "$@" "$dir/$test"/input.json | tee "$tmp"/output.json; echo; } |
+		diff -q - "$dir/$test"/expected.json ; then
 
 		echo "$test OK"
 	else
 		res=$?
-		"$dir"/prettyjson.awk "$dir/$test"/expected.json > "$tmp"/expected.json
-		"$dir"/prettyjson.awk "$tmp"/canonical | diff -u "$tmp"/expected.json - || true
+		"$dir"/prettyjson.awk "$tmp"/output.json > "$tmp"/output.pretty.json
+		"$dir"/prettyjson.awk "$dir/$test"/expected.json > "$tmp"/expected.pretty.json
+		diff -u "$tmp"/output.pretty.json "$tmp"/expected.pretty.json || true
 	fi
 done
