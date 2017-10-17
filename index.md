@@ -4,6 +4,19 @@
 Such human-friendly flexibility can hinder machine treatment of JSON text, particularly when it is used as input for cryptographic hash functions that are expected to yield identical results for logically equivalent input (as is the case in computation of digital signatures).
 This specification defines a unique canonical form for any JSON value, the result being safe for comparison (in that logically equivalent structured data have the same canonical form).
 
+## Table of contents
+
+<!-- toc -->
+
+- [Definition](#definition)
+  * [Example](#example)
+- [Validating implementations](#validating-implementations)
+- [Prior Art](#prior-art)
+- [Changelog](#changelog)
+  * [v1.0.0 (2017-10-17)](#v100-2017-10-17)
+
+<!-- tocstop -->
+
 ## Definition
 
 JSON text in canonical form:
