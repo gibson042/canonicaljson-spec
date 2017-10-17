@@ -232,6 +232,12 @@ header {
 	-webkit-font-smoothing: antialiased;
 }
 
+header {
+	width: 210px;
+	padding: 22px 22px 0;
+	z-index: 1;
+}
+
 p.header {
 	font-size: 16px;
 }
