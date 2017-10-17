@@ -24,7 +24,8 @@ JSON text in canonical form:
      6. including no insignificant leading zeroes in the exponent
   6. MUST represent all strings (including object member names) in their minimal-length UTF-8 encoding
      1. avoiding escape sequences for characters except those otherwise inexpressible in JSON (U+0022 QUOTATION MARK, U+005C REVERSE SOLIDUS, and ASCII control characters U+0000 through U+001F) or UTF-8 (U+D800 through U+DFFF), and
-     2. using two-character escape sequences for characters that support them:
+     2. avoiding escape sequences for combining characters without regard to where they appear, and
+     3. using two-character escape sequences where possible for characters that require escaping:
         * `\b` U+0008 BACKSPACE
         * `\t` U+0009 CHARACTER TABULATION ("tab")
         * `\n` U+000A LINE FEED ("newline")
@@ -32,8 +33,8 @@ JSON text in canonical form:
         * `\r` U+000D CARRIAGE RETURN
         * `\"` U+0022 QUOTATION MARK
         * `\\` U+005C REVERSE SOLIDUS ("backslash"), and
-     3. using six-character `\u00xx` lowercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence, and
-     4. using six-character `\udxxx` lowercase hexadecimal escape sequences for lone surrogates
+     4. using six-character `\u00xx` lowercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence, and
+     5. using six-character `\udxxx` lowercase hexadecimal escape sequences for lone surrogates
 
 ### Example
 
