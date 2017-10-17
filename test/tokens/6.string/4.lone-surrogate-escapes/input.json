@@ -1,0 +1,17 @@
+[
+	"\uD800",
+	"\uDBFF",
+	"\uDC00",
+	"\uDFFF",
+	"\uD800\uDBFF",
+	"\uDC00\uDFFF",
+	"\uDC00\uDBFF",
+
+	{ "\uD800": 0 },
+	{ "\uDBFF": 0 },
+	{ "\uDC00": 0 },
+	{ "\uDFFF": 0 },
+	{ "\uD800\uDBFF": 0 },
+	{ "\uDC00\uDFFF": 0 },
+	{ "\uDC00\uDBFF": 0 }
+]

@@ -19,8 +19,9 @@ wd="`pwd`"
 dir="`dirname "$0"`"
 cd "$dir"
 res=
-for test in tokens/*; do
+for test in `find tokens/ -name input.json | env LC_ALL=C sort`; do
 	[ x$res = x ] && { res=0 ; cd "$wd"; }
+	test="${test%/input.json}"
 	if { "$@" "$dir/$test"/input.json | tee "$tmp"/output.json; echo; } |
 		diff -q - "$dir/$test"/expected.json ; then
 
