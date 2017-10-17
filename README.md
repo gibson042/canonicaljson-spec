@@ -56,3 +56,9 @@ This specification updates the expired [JSON Canonical Form internet draft](http
 Representation of non-integer numbers still matches the canonical **float** representation from [section 3.2.4.2 of XML Schema Datatypes](https://www.w3.org/TR/xmlschema-2/#float-canonical-representation), but integer numbers now have a non-exponential representation matching **integer** ([section 3.3.13.2](https://www.w3.org/TR/xmlschema-2/#integer-canonical-repr)) and [RFC 7638 JSON Web Key (JWK) Thumbprint](https://tools.ietf.org/html/rfc7638).
 
 The treatment of strings generalizes [section 3.3 of RFC 7638](https://tools.ietf.org/html/rfc7638#section-3.3) and [Keybase canonical JSON packing](https://keybase.io/docs/api/1.0/canonical_packings#json) (both of which cryptographically hash JSON text) to cover the full range of Unicode characters.
+
+## Changelog
+
+### v1.0.0 (2017-10-17)
+
+* Specifed _uppercase_ Unicode escape sequences, to match [RFC 7159](https://tools.ietf.org/html/rfc7159).
