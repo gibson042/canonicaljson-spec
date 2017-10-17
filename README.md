@@ -9,8 +9,9 @@ This specification defines a unique canonical form for any JSON value, the resul
 <!-- toc -->
 
 - [Definition](#definition)
-  * [Example](#example)
-- [Validating implementations](#validating-implementations)
+- [Example](#example)
+- [Implementations](#implementations)
+  * [Validation](#validation)
 - [Prior Art](#prior-art)
 - [Changelog](#changelog)
   * [v1.0.0 (2017-10-17)](#v100-2017-10-17)
@@ -49,17 +50,26 @@ JSON text in canonical form:
      4. using six-character `\u00xx` uppercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence, and
      5. using six-character `\uDxxx` uppercase hexadecimal escape sequences for lone surrogates
 
-### Example
+## Example
 
 ```json
 {"-0":0,"-1":-1,"0.1":1.0E-1,"1":1,"10.1":1.01E1,"emoji":"😃","escape":"\u001B","lone surrogate":"\uDEAD","whitespace":" \t\n\r"}
 ```
 
-## Validating implementations
+## Implementations
+
+The following projects are known to correctly implement this specification:
+* [canonicaljson-go](https://godoc.org/github.com/gibson042/canonicaljson-go)
+
+If you know of any others, please submit a pull request to add them!
+
+### Validation
+
+This repository can be used to validate any implementation.
 
   1. Get a local copy of this repository.
   2. Create an executable that uses a candidate implementation to output the JSON canonical form of the contents of its first argument, exiting with a status of 0 if and only if the conversion was successful.
-  3. Invoke `test.sh` from this repository, passing the path to the above executable in the first argument.
+  3. Invoke `./test.sh /path/to/executable` from this repository, substituting the path to the above executable in the first argument.
   4. `test.sh` will provide known input and look for expected output, printing the results, exiting with a status of 0 if and only if the executable (and therefore the candidate implementation) adheres to this specification.
 
 ## Prior Art
