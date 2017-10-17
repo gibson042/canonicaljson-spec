@@ -33,13 +33,13 @@ JSON text in canonical form:
         * `\r` U+000D CARRIAGE RETURN
         * `\"` U+0022 QUOTATION MARK
         * `\\` U+005C REVERSE SOLIDUS ("backslash"), and
-     4. using six-character `\u00xx` lowercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence, and
-     5. using six-character `\udxxx` lowercase hexadecimal escape sequences for lone surrogates
+     4. using six-character `\u00xx` uppercase hexadecimal escape sequences for control characters that require escaping but lack a two-character sequence, and
+     5. using six-character `\uDxxx` uppercase hexadecimal escape sequences for lone surrogates
 
 ### Example
 
 ```json
-{"0":0,"0.1":1.0E-1,"1":1,"10":10,"10.1":1.01E1,"emoji":"😃","escape":"\u001b","lone surrogate":"\udead","whitespace":" \t\n\r"}
+{"-0":0,"-1":-1,"0.1":1.0E-1,"1":1,"10.1":1.01E1,"emoji":"😃","escape":"\u001B","lone surrogate":"\uDEAD","whitespace":" \t\n\r"}
 ```
 
 ## Validating implementations

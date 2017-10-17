@@ -1,17 +1,17 @@
 [
-	"\uD800",
-	"\uDBFF",
-	"\uDC00",
-	"\uDFFF",
-	"\uD800\uDBFF",
-	"\uDC00\uDFFF",
-	"\uDC00\uDBFF",
+	"\ud800",
+	"\udbff",
+	"\udc00",
+	"\udfff",
+	"\ud800\udbff",
+	"\udc00\udfff",
+	"\udc00\udbff",
 
-	{ "\uD800": 0 },
-	{ "\uDBFF": 0 },
-	{ "\uDC00": 0 },
-	{ "\uDFFF": 0 },
-	{ "\uD800\uDBFF": 0 },
-	{ "\uDC00\uDFFF": 0 },
-	{ "\uDC00\uDBFF": 0 }
+	{ "\ud800": 0 },
+	{ "\udbff": 0 },
+	{ "\udc00": 0 },
+	{ "\udfff": 0 },
+	{ "\ud800\udbff": 0 },
+	{ "\udc00\udfff": 0 },
+	{ "\udc00\udbff": 0 }
 ]
