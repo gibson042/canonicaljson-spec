@@ -2,7 +2,15 @@
 BEGIN {
 	# define constants
 	STRUCTURAL_TOKEN = "^[]{:,}[]"
-	TOKEN = "[\t\n\r ]+|[]{:,}[]|null|false|true|-?(0|[1-9][0-9]*)(\\.[0-9]+|)([Ee][+-]?[0-9]+|)|\"(\\\\[\"\\\\/bfnrt]|\\\\u[0-9a-fA-F]{4}|[^\\0-\\37\"\\\\])*\""
+		# whitespace, punctuator, keyword literal, number, or string
+	TOKEN = sprintf(                                                        \
+		"[\t\n\r ]+|[]{:,}[]|null|false|true|"                              \
+		"-?(0|[1-9][0-9]*)(\\.[0-9]+)?([Ee][+-]?[0-9]+)?|"                  \
+		"\"(\\\\[\"\\\\/bfnrt]|\\\\u[0-9a-fA-F]{4}|[^\\%d-\\37\"\\\\])*\"", \
+
+		# ancient awk implementations mishandle NULL characters
+		match("", "[\\0]")                                                  \
+	)
 	MALFORMED = "Non-token input after %d characters: "
 	MAX_LINE = 72
 	INDENT = "  "
@@ -42,7 +50,7 @@ BEGIN {
 				err = err substr(excess, 1, free)
 			}
 
-			print err "\n" > "/dev/stderr"
+			printf "%s\n", err > "/dev/stderr"
 			exit 65 # EX_DATAERR
 		}
 
@@ -51,7 +59,7 @@ BEGIN {
 		unconsumed = substr(unconsumed, RLENGTH + 1)
 		consumed += RLENGTH
 
-		# skip whitespace (octal \40 is the first non-whitespace non-control character)
+		# skip whitespace (octal \41 is the first non-whitespace non-control character)
 		if ( token < "\41" ) continue
 
 		# detect some invalid adjancencies
@@ -65,22 +73,22 @@ BEGIN {
 		if ( token == "]" || token == "}" ) {
 			indent = substr(indent, length(INDENT) + 1)
 			if ( new_line != "maybe" ) {
-				print "\n" indent
+				printf "\n%s", indent
 			}
 		} else if ( new_line ) {
-			print "\n" indent
+			printf "\n%s", indent
 		}
 
 		# output token and remember newline intent
 		if ( token == "[" || token == "{" ) {
-			print token
+			printf "%s", token
 			indent = indent INDENT
 			new_line = "maybe"
 		} else if ( token == ":" ) {
-			print ": "
+			printf ": "
 			new_line = 0
 		} else {
-			print token
+			printf "%s", token
 			new_line = ( token == "," )
 		}
 	}
@@ -89,4 +97,4 @@ BEGIN {
 	consumed++
 }
 
-END { print "\n" }
+END { printf "\n" }
