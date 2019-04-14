@@ -80,6 +80,9 @@ Representation of non-integer numbers still matches the canonical **float** repr
 
 The treatment of strings generalizes [section 3.3 of RFC 7638](https://tools.ietf.org/html/rfc7638#section-3.3) and [Keybase canonical JSON packing](https://keybase.io/docs/api/1.0/canonical_packings#json) (both of which cryptographically hash JSON text) to cover the full range of Unicode characters.
 
+[OLPC "Canonical JSON"](http://wiki.laptop.org/go/Canonical_JSON) (which is also intended to support meaningful hashes of structured data) describes a format that is not actually JSON, because its strings are sequences of bytes rather than sequences of Unicode code points (e.g., the tab-containing string `"	"` is conforming OLPC "Canonical JSON" but not JSON and `"\t"` is conforming JSON but not OLPC "Canonical JSON").
+But where they overlap, this specification generalizes OLPC "Canonical JSON" to include floating point numbers and revises it for Unicode-aware string sorting.
+
 ## Changelog
 
 ### v1.0.0 (2017-10-17)
