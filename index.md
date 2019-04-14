@@ -15,6 +15,7 @@ This specification defines a unique canonical form for any JSON value, the resul
 - [Prior Art](#prior-art)
 - [Changelog](#changelog)
   * [v1.0.0 (2017-10-17)](#v100-2017-10-17)
+  * [v1.0.1 (2018-07-01)](#v101-2018-07-01)
 
 <!-- tocstop -->
 
@@ -88,3 +89,7 @@ But where they overlap, this specification generalizes OLPC "Canonical JSON" to 
 ### v1.0.0 (2017-10-17)
 
 * Specifed _uppercase_ Unicode escape sequences, to match [RFC 7159](https://tools.ietf.org/html/rfc7159).
+
+### v1.0.1 (2018-07-01)
+
+* Updated prettyjson.awk utility for greater compatibility with non-GNU awk implementations.
