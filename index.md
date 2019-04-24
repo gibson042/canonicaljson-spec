@@ -1,6 +1,3 @@
----
----
-
 # JSON Canonical Form
 
 [RFC 7159](https://tools.ietf.org/html/rfc7159) defines JSON as "a text format for the serialization of structured data", but allows many distinct serializations to describe the _same_ data.
