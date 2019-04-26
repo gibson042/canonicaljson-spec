@@ -2,7 +2,8 @@ title: canonicaljson
 description: Specification of canonical-form JSON for equivalence comparison.
 google_analytics: 
 show_downloads: true
+include:
+ - favicon.ico
 theme: jekyll-theme-dinky
-
 gems:
   - jekyll-mentions
