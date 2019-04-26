@@ -2,7 +2,7 @@
 
 [RFC 7159](https://tools.ietf.org/html/rfc7159) defines JSON as "a text format for the serialization of structured data", but allows many distinct serializations to describe the _same_ data.
 Such human-friendly flexibility can hinder machine treatment of JSON text, particularly when it is used as input for cryptographic hash functions that are expected to yield identical results for logically equivalent input (as is the case in computation of digital signatures).
-This specification defines a unique canonical form for any JSON value, the result being safe for comparison (in that logically equivalent structured data have the same canonical form).
+This specification defines a unique canonical form for **every** JSON value, the result being safe for comparison (in that logically equivalent structured data are guaranteed to have the same canonical form).
 
 <script><!--
   // Work around the Jekyll Dinky theme's lack of <head> customization.
