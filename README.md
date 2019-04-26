@@ -2,7 +2,8 @@
 
 [RFC 7159](https://tools.ietf.org/html/rfc7159) defines JSON as "a text format for the serialization of structured data", but allows many distinct serializations to describe the _same_ data.
 Such human-friendly flexibility can hinder machine treatment of JSON text, particularly when it is used as input for cryptographic hash functions that are expected to yield identical results for logically equivalent input (as is the case in computation of digital signatures).
-This specification defines a unique canonical form for any JSON value, the result being safe for comparison (in that logically equivalent structured data have the same canonical form).
+This specification defines a unique canonical form for **every** JSON value, the result being safe for comparison (in that logically equivalent structured data are guaranteed to have the same canonical form).
+
 
 ## Table of contents
 
@@ -15,6 +16,8 @@ This specification defines a unique canonical form for any JSON value, the resul
 - [Prior Art](#prior-art)
 - [Changelog](#changelog)
   * [v1.0.0 (2017-10-17)](#v100-2017-10-17)
+  * [v1.0.1 (2018-07-01)](#v101-2018-07-01)
+  * [v1.0.2 (2019-04-14)](#v102-2019-04-14)
 
 <!-- tocstop -->
 
@@ -28,7 +31,8 @@ JSON text in canonical form:
   4. MUST represent all integer numbers (those with a zero-valued fractional part)
      1. without a leading minus sign when the value is zero, and
      2. without a decimal point, and
-     3. without an exponent
+     3. without an exponent, and
+     4. without insignificant leading zeroes (as already required of all JSON numbers)
   5. MUST represent all non-integer numbers in exponential notation
      1. including a nonzero single-digit significand integer part, and
      2. including a nonempty significand fractional part, and
@@ -80,8 +84,19 @@ Representation of non-integer numbers still matches the canonical **float** repr
 
 The treatment of strings generalizes [section 3.3 of RFC 7638](https://tools.ietf.org/html/rfc7638#section-3.3) and [Keybase canonical JSON packing](https://keybase.io/docs/api/1.0/canonical_packings#json) (both of which cryptographically hash JSON text) to cover the full range of Unicode characters.
 
+[OLPC "Canonical JSON"](http://wiki.laptop.org/go/Canonical_JSON) (which is also intended to support meaningful hashes of structured data) describes a format that is not actually JSON, because its strings are sequences of bytes rather than sequences of Unicode code points (e.g., the tab-containing string `"	"` is conforming OLPC "Canonical JSON" but not JSON and `"\t"` is conforming JSON but not OLPC "Canonical JSON").
+But where they overlap, this specification generalizes OLPC "Canonical JSON" to include floating point numbers and revises it for Unicode-aware string sorting.
+
 ## Changelog
 
 ### v1.0.0 (2017-10-17)
 
 * Specifed _uppercase_ Unicode escape sequences, to match [RFC 7159](https://tools.ietf.org/html/rfc7159).
+
+### v1.0.1 (2018-07-01)
+
+* Updated prettyjson.awk utility for greater compatibility with non-GNU awk implementations.
+
+### v1.0.2 (2019-04-14)
+
+* Explicitly mentioned the prohibition of insignificant leading zeroes from [RFC 7159](https://tools.ietf.org/html/rfc8259#section-6).
