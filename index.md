@@ -4,6 +4,18 @@
 Such human-friendly flexibility can hinder machine treatment of JSON text, particularly when it is used as input for cryptographic hash functions that are expected to yield identical results for logically equivalent input (as is the case in computation of digital signatures).
 This specification defines a unique canonical form for any JSON value, the result being safe for comparison (in that logically equivalent structured data have the same canonical form).
 
+<script><!--
+  // Work around the Jekyll Dinky theme's lack of <head> customization.
+  // https://github.com/pages-themes/dinky/issues/12
+  (function( head, link ) {
+    head = head || document.getElementsByName("head")[0] || { appendChild: Function.prototype };
+    link.setAttribute("rel", "shortcut icon");
+    link.setAttribute("type", "image/gif");
+    link.setAttribute("href", "favicon.ico");
+    head.appendChild(link);
+  })(document.head, document.createElement("link"));
+//--></script>
+
 ## Table of contents
 
 <!-- toc -->
