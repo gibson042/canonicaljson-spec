@@ -64,6 +64,7 @@ JSON text in canonical form:
 
 The following projects are known to correctly implement this specification:
 * [canonicaljson-go](https://godoc.org/github.com/gibson042/canonicaljson-go)
+* [canonicaljson-rs](https://github.com/mozilla-services/canonicaljson-rs) (*serializer only*)
 
 If you know of any others, please submit a pull request to add them!
 
